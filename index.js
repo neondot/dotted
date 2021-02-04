@@ -8,6 +8,8 @@ const app = express();
 (async function dotted() {
   await build.generate();
   
+  app.use(express.static('build'));
+  
   config.routes.forEach((route) => {
     if (!['post', 'get', 'put', 'delete', 'all'].includes(route.mode)) {
       log(`Invalid route mode: ${route.mode}. Skipping route.`, 'yellow');

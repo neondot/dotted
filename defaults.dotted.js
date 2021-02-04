@@ -14,5 +14,10 @@ module.exports = {
       path: '/',
       mode: 'all',
     }
-  ]
+  ],
+
+  head: {
+    title: 'Dotted App',
+    meta: [],
+  },
 };
