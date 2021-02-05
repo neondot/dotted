@@ -16,12 +16,7 @@ module.exports = {
     },
   },
 
-  routes: [
-    {
-      path: '/',
-      mode: 'all',
-    }
-  ],
+  pagesPath: 'pages',
 
   head: {
     title: 'Dotted App',

@@ -11,12 +11,14 @@
   <title>:title:</title>
 </head>
 <body dotted>
-  <div id="app"></div>
+  <div id="app">
+    :ssr_build:
+  </div>
 
   <script src="/app.js" type="module"></script>
   <!-- Load the script to enable HMR. -->
   <script>
-    window.HMR_WEBSOCKET_PORT = :HMR_PORT:;
+    window.HMR_WEBSOCKET_PORT = :hrm_port:;
   </script>
   <script type="module" src="/_snowpack/hmr-client.js"></script>
 </body>

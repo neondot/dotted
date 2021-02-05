@@ -10,14 +10,14 @@ const app = express();
   
   app.use(express.static('build'));
   
-  config.routes.forEach((route) => {
-    if (!['post', 'get', 'put', 'delete', 'all'].includes(route.mode)) {
-      log(`Invalid route mode: ${route.mode}. Skipping route.`, 'yellow');
+  build.routes.forEach((route) => {
+    if (!['post', 'get', 'put', 'delete', 'all'].includes(route.$mode)) {
+      log(`Invalid route mode: ${route.$mode}. Skipping route.`, 'yellow');
     } else {
-      if (config.debug) log(`Handling route ${route.path} with mode ${route.mode}`, 'green');
+      if (config.debug) log(`Handling route ${route.$path} with mode ${route.$mode}`, 'green');
   
       // Handle the route
-      app[route.mode](route.path, serve);
+      app[route.$mode](route.$path, serve);
     }
   });
   
