@@ -8,18 +8,11 @@ const app = express();
 (async function dotted() {
   await build.generate();
   
+  // Use build folder as static assets
   app.use(express.static('build'));
-  
-  build.routes.forEach((route) => {
-    if (!['post', 'get', 'put', 'delete', 'all'].includes(route.$mode)) {
-      log(`Invalid route mode: ${route.$mode}. Skipping route.`, 'yellow');
-    } else {
-      if (config.debug) log(`Handling route ${route.$path} with mode ${route.$mode}`, 'green');
-  
-      // Handle the route
-      app[route.$mode](route.$path, serve);
-    }
-  });
+
+  // Handle all routes with generic serve function
+  app.all('/*', serve);
   
   log(`Server started and listening on localhost:${config.port}`, 'blue');
   app.listen(config.port);

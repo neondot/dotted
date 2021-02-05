@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const build = require('./build');
 const config = require('./config');
 const { log } = require('./utils');
 
@@ -18,7 +17,7 @@ module.exports = (request, response) => {
     filledContent = indexContent
       .replace(/(\:title\:)/gi, config.head.title)
       .replace(/(\:hrm_port\:)/gi, config.snowpack.devOptions.hmrPort)
-      .replace(/:ssr_build:/gi, build.routes.get(url).$template);
+      .replace(/:ssr_build:/gi, ''); // TODO replace with the html obtained from some kind of build
 
     // Send back the filled response
     response.send(filledContent).end();
