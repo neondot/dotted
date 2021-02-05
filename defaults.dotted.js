@@ -6,7 +6,14 @@ module.exports = {
     mount: {
       src: '/',
       public: { url: '/', static: true, resolve: false }
-    }
+    },
+    devOptions: {
+      hmr: true,
+      hmrPort: 4000,
+    },
+    buildOptions: {
+      watch: true,
+    },
   },
 
   routes: [

@@ -10,9 +10,11 @@ module.exports = {
   // into the ./build folder
   async generate() {
     try {
+      log('Starting snowpack build. Snowpack output will follow', 'blue');
       const snowpackConfig = createConfiguration({...config.snowpack});
       const snowpackBuild = await build({ config: snowpackConfig });
       result = snowpackBuild.result;
+      log('Build done', 'green');
     } catch (e) {
       log(e, 'red');
     }

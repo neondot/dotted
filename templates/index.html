@@ -14,5 +14,10 @@
   <div id="app"></div>
 
   <script src="/app.js"></script>
+  <!-- Load the script to enable HMR. -->
+  <script>
+    window.HMR_WEBSOCKET_PORT = :HMR_PORT:;
+  </script>
+  <script type="module" src="/_snowpack/hmr-client.js"></script>
 </body>
 </html>
