@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { getServer } = require('./build');
+const { getServer, getRuntime } = require('./build');
 const config = require('./config');
 const { log } = require('./utils');
 
@@ -25,6 +25,11 @@ module.exports = async (request, response) => {
   try {
     const indexContent = fs.readFileSync(path.resolve('./templates/index.html')).toString();
 
+    // Load the application router
+    // const runtime = getRuntime();
+    // const routes = (await runtime.importModule('/app.js')).exports.router;
+    // console.log(routes);
+
     // Fill the index content with layout defined in route and then ssr-render the route
     // append it to the layout and send the response
     filledContent = indexContent
@@ -35,7 +40,7 @@ module.exports = async (request, response) => {
     // Send back the filled response
     response.send(filledContent).end();
   } catch (e) {
-    log(`No index.html defined for url '${url}'`, 'red');
+    log(e.stack, 'red');
     // Replace the error message with an error custom layout
     response.status(500).send(JSON.stringify(e));
   }
