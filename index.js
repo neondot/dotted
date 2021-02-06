@@ -6,10 +6,7 @@ const build = require('./build');
 const app = express();
 
 (async function dotted() {
-  await build.generate();
-  
-  // Use build folder as static assets
-  app.use(express.static('build'));
+  await build.start();
 
   // Handle all routes with generic serve function
   app.all('/*', serve);

@@ -1,11 +1,24 @@
 const fs = require('fs');
 const path = require('path');
+const { getServer } = require('./build');
 const config = require('./config');
 const { log } = require('./utils');
 
-module.exports = (request, response) => {
+module.exports = async (request, response) => {
   const url = request.path.length > 0 ? request.path : '/';
   log(`Requested route path: '${url}' with mode '${request.method}'`, 'blue');
+  
+  try {
+    const server = getServer();
+    const file = await server.loadUrl(request.path);
+    response
+      .header('Content-Type', file.contentType)
+      .send(file.contents.toString())
+      .end();
+    return;
+  } catch (e) {
+    log(`Requested path ${request.path} not handled by snowpack. Moving on`, 'yellow');
+  };
 
   // If we are here no static file is requested and we are
   // trying to navigate a dot url
